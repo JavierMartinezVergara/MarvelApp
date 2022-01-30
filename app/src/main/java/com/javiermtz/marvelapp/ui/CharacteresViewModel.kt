@@ -28,7 +28,7 @@ class CharacteresViewModel @Inject constructor(
       withContext(Dispatchers.IO){
         val response = repositoryMarvel.getMarvelCharacters()
         when(response){
-          is GenericError -> TODO()
+          is GenericError -> response.error
           is Success -> {
             _characteresMarvel.postValue(response.dataResponse.data.results)
           }
