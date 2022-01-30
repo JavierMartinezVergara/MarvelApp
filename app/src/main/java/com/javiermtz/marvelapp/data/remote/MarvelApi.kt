@@ -1,6 +1,5 @@
 package com.javiermtz.marvelapp.data.remote
 
-import androidx.lifecycle.LiveData
 import com.javiermtz.marvelapp.BuildConfig
 import com.javiermtz.marvelapp.model.ResponseMarvel
 import retrofit2.Response

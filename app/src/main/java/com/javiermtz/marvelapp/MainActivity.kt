@@ -15,18 +15,10 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-  private val viewModel : CharacteresViewModel by viewModels()
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
 
-    lifecycleScope.launch {
-      viewModel.getData()
-    }
-
-    viewModel.characteresMarvel.observe(this, {
-      Toast.makeText(this, it.toString(), Toast.LENGTH_LONG).show()
-    })
 
   }
 }
