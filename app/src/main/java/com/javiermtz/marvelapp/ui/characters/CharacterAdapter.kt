@@ -1,4 +1,4 @@
-package com.javiermtz.marvelapp.ui
+package com.javiermtz.marvelapp.ui.characters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,10 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.javiermtz.marvelapp.databinding.CharacterItemBinding
 import com.javiermtz.marvelapp.model.responses.Results
+import com.javiermtz.marvelapp.ui.characters.CharacterAdapter.ViewHolder
 import com.javiermtz.marvelapp.util.Constans
 
 class CharacterAdapter(private val onClickListener: OnClickListener) :
-    ListAdapter<Results, CharacterAdapter.ViewHolder>(MyDiffUtil) {
+    ListAdapter<Results, ViewHolder>(MyDiffUtil) {
 
     companion object MyDiffUtil : DiffUtil.ItemCallback<Results>() {
         override fun areItemsTheSame(oldItem: Results, newItem: Results): Boolean {
@@ -25,13 +26,13 @@ class CharacterAdapter(private val onClickListener: OnClickListener) :
 
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(CharacterItemBinding.inflate(
             LayoutInflater.from(parent.context),parent, false
         ))
     }
 
-    override fun onBindViewHolder(holder: CharacterAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val result = getItem(position)
         holder.itemView.setOnClickListener {
             onClickListener.onClick(result)
