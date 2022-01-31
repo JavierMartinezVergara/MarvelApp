@@ -16,26 +16,21 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class CharacteresViewModel @Inject constructor(
+class ComicsViewModel @Inject constructor(
   private val repositoryMarvel: RepositoryMarvel
 ) : ViewModel(){
 
-  init {
-    getCharacters()
-  }
+  private val _comics = MutableLiveData<List<ResultsComics>>()
+  val comics : LiveData<List<ResultsComics>> = _comics
 
-
-  private val _characteresMarvel = MutableLiveData<List<Results>>()
-  val characteresMarvel : LiveData<List<Results>> = _characteresMarvel
-
-  fun getCharacters(){
+  fun getComics(characterId : Int){
     viewModelScope.launch {
       withContext(Dispatchers.IO){
-        val response = repositoryMarvel.getMarvelCharacters()
+        val response = repositoryMarvel.getComics(characterId)
         when(response){
           is GenericError -> response.error
           is Success -> {
-            _characteresMarvel.postValue(response.dataResponse.data.results)
+            _comics.postValue(response.dataResponse.data.results)
           }
         }
       }
