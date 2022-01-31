@@ -5,10 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.javiermtz.marvelapp.databinding.CharacterItemBinding
-import com.javiermtz.marvelapp.model.Results
+import com.javiermtz.marvelapp.model.responses.Results
+import com.javiermtz.marvelapp.util.Constans
 
-class CharacterAdapter :
+class CharacterAdapter(private val onClickListener: OnClickListener) :
     ListAdapter<Results, CharacterAdapter.ViewHolder>(MyDiffUtil) {
 
     companion object MyDiffUtil : DiffUtil.ItemCallback<Results>() {
@@ -31,15 +33,27 @@ class CharacterAdapter :
 
     override fun onBindViewHolder(holder: CharacterAdapter.ViewHolder, position: Int) {
         val result = getItem(position)
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(result)
+        }
         holder.bind(result)
     }
     inner class ViewHolder(private val binding: CharacterItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(Results: Results?) {
-            binding.name.text = Results?.name
+        fun bind(results: Results?) {
+            binding.name.text = results?.name
+            Glide.with(binding.imageCharacter)
+                .load(results?.thumbnail?.path+Constans.MARVELDIMENSIONMEDIUM+results?.thumbnail?.extension)
+                .into(binding.imageCharacter)
+
         }
     }
+
+    class OnClickListener(val clickListener: (result : Results) -> Unit) {
+        fun onClick(result: Results) = clickListener(result)
+    }
 }
+
 
 
 

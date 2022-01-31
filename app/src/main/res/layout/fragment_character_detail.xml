@@ -3,15 +3,65 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="8dp">
   <TextView
-      android:id="@+id/name"
+      android:id="@+id/nameCharacter"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:textAlignment="center"
+      android:textSize="24sp"
+      android:layout_marginTop="8dp"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      tools:text="Texto "
+      tools:text="Name"
       />
 
+  <ImageView
+      android:id="@+id/imageCharacter"
+      android:layout_width="160dp"
+      android:layout_height="200dp"
+      android:layout_marginTop="8dp"
+      android:contentDescription="@string/imageDescription"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/nameCharacter"
+      />
+
+  <TextView
+      android:id="@+id/descriptionCharacter"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:textAlignment="center"
+      android:textSize="14sp"
+      android:layout_marginTop="8dp"
+      android:text="@string/no_description"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/imageCharacter"/>
+
+  <TextView
+      android:id="@+id/numComicsCharacter"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:textAlignment="center"
+      android:textSize="14sp"
+      android:layout_marginTop="8dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/descriptionCharacter"
+      tools:text="Num Comics"/>
+
+  <TextView
+      android:id="@+id/numSeriesCharacter"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:textAlignment="center"
+      android:textSize="14sp"
+      android:layout_marginTop="8dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/numComicsCharacter"
+      tools:text="Num Comics"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

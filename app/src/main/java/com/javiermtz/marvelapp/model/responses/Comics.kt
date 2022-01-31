@@ -1,7 +1,7 @@
-package com.javiermtz.marvelapp.model
+package com.javiermtz.marvelapp.model.responses
 import com.google.gson.annotations.SerializedName
 
-data class Events(
+data class Comics(
 
   @SerializedName("available") val available: Int,
   @SerializedName("collectionURI") val collectionURI: String,

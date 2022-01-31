@@ -1,6 +1,7 @@
-package com.javiermtz.marvelapp.model
+package com.javiermtz.marvelapp.model.responses
 
 import com.google.gson.annotations.SerializedName
+import com.javiermtz.marvelapp.model.responses.Data
 
 data class ResponseMarvel(
 

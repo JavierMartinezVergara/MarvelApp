@@ -1,8 +1,7 @@
 package com.javiermtz.marvelapp.data.repository
 
 import com.javiermtz.marvelapp.data.remote.MarvelApi
-import com.javiermtz.marvelapp.model.ResponseMarvel
-import com.javiermtz.marvelapp.model.Results
+import com.javiermtz.marvelapp.model.responses.ResponseMarvel
 import okio.IOException
 import javax.inject.Inject
 

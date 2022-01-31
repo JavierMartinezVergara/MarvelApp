@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.javiermtz.marvelapp.data.repository.RepositoryMarvel
 import com.javiermtz.marvelapp.data.repository.ResultWrapper.GenericError
 import com.javiermtz.marvelapp.data.repository.ResultWrapper.Success
-import com.javiermtz.marvelapp.model.Results
+import com.javiermtz.marvelapp.model.responses.Results
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,6 +18,10 @@ import javax.inject.Inject
 class CharacteresViewModel @Inject constructor(
   private val repositoryMarvel: RepositoryMarvel
 ) : ViewModel(){
+
+  init {
+    getData()
+  }
 
 
   private val _characteresMarvel = MutableLiveData<List<Results>>()
