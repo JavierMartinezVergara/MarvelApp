@@ -1,5 +1,8 @@
 <resources>
   <string name="app_name">MarvelApp</string>
-  <!-- TODO: Remove or change this placeholder text -->
   <string name="hello_blank_fragment">Hello blank fragment</string>
+  <string name="imageDescription">image</string>
+  <string name="no_description">Sin descripción</string>
+  <string name="num_comics">Número de apariciones en comics: %1$s</string>
+  <string name="num_series">Número de series: %1$s</string>
 </resources>

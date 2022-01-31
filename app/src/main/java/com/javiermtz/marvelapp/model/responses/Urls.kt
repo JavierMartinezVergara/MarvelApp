@@ -1,4 +1,4 @@
-package com.javiermtz.marvelapp.model
+package com.javiermtz.marvelapp.model.responses
 import com.google.gson.annotations.SerializedName
 data class Urls(
 
