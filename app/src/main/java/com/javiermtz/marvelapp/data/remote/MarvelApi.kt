@@ -14,7 +14,7 @@ interface MarvelApi {
   @GET("/v1/public/characters")
   suspend fun getAllCharacteres(
     @Query("apikey") apiKey : String =   BuildConfig.PUBLIC_API_KEY_MARVEL,
-    @Query("ts") ts: Int = 1643528450,
+    @Query("ts") ts: Long,
     @Query("hash") hash: String = "f791190f97797b142ceccb5b02e6c561",
     @Query("modifiedSince") modifiedSince : Long = SimpleDateFormat("dd-MM-yyyy").parse("01-0201-2017").time,
     @Query("offset") offset : Int = 200,

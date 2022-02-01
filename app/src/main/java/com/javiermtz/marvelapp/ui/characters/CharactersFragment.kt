@@ -46,7 +46,8 @@ class CharactersFragment : Fragment() {
         image = dataCharacter.thumbnail.path + Constans.MARVELDIMENSIONLARGE + dataCharacter.thumbnail.extension,
         description = dataCharacter.description,
         numComics = dataCharacter.comics.available,
-        numSeries = dataCharacter.series.available
+        numSeries = dataCharacter.series.available,
+        url = dataCharacter.urls.firstOrNull()?.url ?: ""
       )
       val action =
         CharactersFragmentDirections.actionCharactersFragmentToCharacterDetailFragment(characterData)
