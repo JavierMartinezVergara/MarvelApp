@@ -10,9 +10,10 @@ class RepositoryMarvel @Inject constructor(
   private val apiMarvel: MarvelApi
 ) {
 
-  suspend fun getMarvelCharacters(): ResultWrapper<ResponseMarvel> {
+  suspend fun getMarvelCharacters(offSet : Int = 0): ResultWrapper<ResponseMarvel> {
     return try {
-      val response = apiMarvel.getAllCharacteres()
+      ResultWrapper.Loading
+      val response = apiMarvel.getAllCharacteres(offset = offSet)
       if (response.isSuccessful) {
         ResultWrapper.Success(response.body()!!)
       } else {
@@ -26,6 +27,7 @@ class RepositoryMarvel @Inject constructor(
 
   suspend fun getComics(charaterId : Int): ResultWrapper<ResponseMarvelComics> {
     return try {
+      ResultWrapper.Loading
       val response = apiMarvel.getComics(characters = charaterId)
       if (response.isSuccessful) {
         ResultWrapper.Success(response.body()!!)
