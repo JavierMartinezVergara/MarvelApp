@@ -20,7 +20,7 @@
       android:name="com.javiermtz.marvelapp.ui.detailcharacter.CharacterDetailFragment"
       android:label="fragment_character_detail"
       tools:layout="@layout/fragment_character_detail" >
-    <argument
+      <argument
         android:name="characterData"
         app:argType="com.javiermtz.marvelapp.model.local.Character" />
   </fragment>

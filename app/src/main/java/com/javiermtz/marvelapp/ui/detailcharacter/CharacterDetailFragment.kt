@@ -1,5 +1,7 @@
 package com.javiermtz.marvelapp.ui.detailcharacter
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -48,6 +50,10 @@ class CharacterDetailFragment : Fragment() {
       .placeholder(R.drawable.splash_image)
       .error(R.drawable.splash_image)
       .into(binding.imageCharacter)
+    binding.imageCharacter.setOnClickListener {
+      val intent : Intent = Intent(Intent.ACTION_VIEW, Uri.parse(args.characterData.url))
+      startActivity(intent)
+    }
     binding.nameCharacter.text = args.characterData.name
     binding.descriptionCharacter.text = args.characterData.description
     binding.numComicsCharacter.text =
@@ -56,6 +62,10 @@ class CharacterDetailFragment : Fragment() {
       requireContext().getString(R.string.num_series, args.characterData.numSeries.toString())
 
     adapter = ComicsAdapter(OnClickListener { comic ->
+      val intent : Intent = Uri.parse(comic.urls.first().url).let {
+        Intent(Intent.ACTION_VIEW, it)
+      }
+      startActivity(intent)
     })
 
   }

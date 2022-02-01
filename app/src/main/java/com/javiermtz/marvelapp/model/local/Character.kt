@@ -11,4 +11,5 @@ data class Character(
   val description : String,
   val numComics : Int,
   val numSeries : Int,
+  val url : String
 ): Parcelable

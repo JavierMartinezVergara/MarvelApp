@@ -7,13 +7,18 @@ import okio.IOException
 import javax.inject.Inject
 
 class RepositoryMarvel @Inject constructor(
-  private val apiMarvel: MarvelApi
+  private val apiMarvel: MarvelApi,
+  private val md5 : MD5
 ) {
 
-  suspend fun getMarvelCharacters(offSet : Int = 0): ResultWrapper<ResponseMarvel> {
+  suspend fun getMarvelCharacters(
+    offSet : Int = 0): ResultWrapper<ResponseMarvel> {
     return try {
       ResultWrapper.Loading
-      val response = apiMarvel.getAllCharacteres(offset = offSet)
+      val response = apiMarvel.getAllCharacteres(
+        ts = md5.currentTimestamp,
+        hash = md5.getMD5(),
+        offset = offSet)
       if (response.isSuccessful) {
         ResultWrapper.Success(response.body()!!)
       } else {
