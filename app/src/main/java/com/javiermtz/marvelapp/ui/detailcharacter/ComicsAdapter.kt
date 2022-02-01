@@ -6,13 +6,21 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.javiermtz.marvelapp.R
 import com.javiermtz.marvelapp.databinding.ComicItemBinding
 import com.javiermtz.marvelapp.model.responses.ResultsComics
 import com.javiermtz.marvelapp.ui.detailcharacter.ComicsAdapter.ComicViewHolder
 import com.javiermtz.marvelapp.util.Constans
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ComicsAdapter(private val onClickListener: OnClickListener) :
   ListAdapter<ResultsComics, ComicViewHolder>(MyDiffUtil) {
+
+  private val adapterScope = CoroutineScope(Dispatchers.Default)
+
 
   companion object MyDiffUtil : DiffUtil.ItemCallback<ResultsComics>() {
     override fun areItemsTheSame(oldItem: ResultsComics, newItem: ResultsComics): Boolean {
@@ -44,11 +52,17 @@ class ComicsAdapter(private val onClickListener: OnClickListener) :
     RecyclerView.ViewHolder(binding.root) {
     fun bind(ResultsComics: ResultsComics?) {
       binding.nameComic.text = ResultsComics?.title
-      Glide.with(binding.imageComic)
-        .load(ResultsComics?.thumbnail?.path + Constans.MARVELDIMENSIONMEDIUM + ResultsComics?.thumbnail?.extension)
-        .into(binding.imageComic)
+      adapterScope.launch {
+        withContext(Dispatchers.Main){
+          Glide.with(binding.imageComic)
+            .load(ResultsComics?.thumbnail?.path + Constans.MARVELDIMENSIONMEDIUM + ResultsComics?.thumbnail?.extension)
+            .placeholder(R.drawable.splash_image)
+            .error(R.drawable.splash_image)
+            .into(binding.imageComic)
+        }
+      }
+      }
 
-    }
   }
 
   class OnClickListener(val clickListener: (result: ResultsComics) -> Unit) {

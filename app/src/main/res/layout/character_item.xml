@@ -4,25 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp">
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp">
 
   <ImageView
       android:id="@+id/imageCharacter"
-      android:layout_width="100dp"
-      android:layout_height="100dp"
+      android:layout_width="80dp"
+      android:layout_height="80dp"
+      android:contentDescription="@string/imageDescription"
+      app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      android:contentDescription="@string/imageDescription"
       />
   <TextView
       android:id="@+id/name"
       android:layout_width="0dp"
       android:layout_height="18dp"
       android:layout_marginStart="8dp"
+      android:textSize="16sp"
+      app:layout_constraintBottom_toBottomOf="@+id/imageCharacter"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toEndOf="@+id/imageCharacter"
       app:layout_constraintTop_toTopOf="@+id/imageCharacter"
       tools:text="Texto "
+      />
+
+  <View
+      android:id="@+id/border2"
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:layout_alignParentBottom="true"
+      android:layout_marginTop="4dp"
+      android:background="#808080"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/imageCharacter"
       />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
