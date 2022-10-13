@@ -21,4 +21,18 @@
     <item name="windowSplashScreenAnimationDuration">1000</item>
     <item name="windowSplashScreenIconBackgroundColor">@color/white</item>
   </style>
+
+  <style name="Theme.NavigationDrawer.AppBarOverlay"
+      parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+  <style name="Theme.NavigationDrawer.PopupOverlay"
+      parent="ThemeOverlay.AppCompat.Light" />
+  <style name="button_card" parent=
+      "Widget.MaterialComponents.Button.OutlinedButton">
+    <item name="strokeColor">@color/purple_700</item>
+    <item name="strokeWidth">2dp</item>
+  </style>
+
+  <style name="Theme.MarvelApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+  <style name="Theme.MarvelApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
