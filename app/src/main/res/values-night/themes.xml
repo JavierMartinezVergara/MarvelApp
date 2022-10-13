@@ -14,10 +14,4 @@
     <!-- Customize your theme here. -->
   </style>
 
-  <style name="Theme.CustomSplashScreenTheme" parent="Theme.SplashScreen">
-    <item name="windowSplashScreenBackground">@color/black</item>
-    <item name="windowSplashScreenAnimatedIcon">@drawable/splash_image</item>
-    <item name="windowSplashScreenAnimationDuration">1000</item>
-    <item name="windowSplashScreenIconBackgroundColor">@color/black</item>
-  </style>
 </resources>
