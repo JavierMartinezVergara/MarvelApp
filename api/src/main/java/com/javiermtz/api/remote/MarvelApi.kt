@@ -20,12 +20,10 @@ interface MarvelApi {
   ): ResponseMarvel
 
   @GET("/v1/public/comics")
-  fun getComics(
+  suspend fun getComics(
 
-    @Query("apikey") apiKey: String = "",
+    @Query("apikey") apiKey: String = "cadf4a57a4c3262a0709cd0207f86d8f",
     @Query("ts") ts: Int = 1643528450,
     @Query("hash") hash: String = "f791190f97797b142ceccb5b02e6c561",
-    @Query("characters") characters: Int,
-    @Query("limit") limit: Int = 100
   ): ResponseMarvelComics
 }

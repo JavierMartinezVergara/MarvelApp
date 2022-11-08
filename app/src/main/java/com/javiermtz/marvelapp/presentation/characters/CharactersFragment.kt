@@ -35,17 +35,17 @@ class CharactersFragment : Fragment() {
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View {
-    binding = FragmentCharactersBinding.inflate(layoutInflater, container, false)
+    binding = FragmentCharactersBinding.inflate(inflater, container, false)
     return binding.root
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     viewLifecycleOwner.lifecycleScope.launch {
-      viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+      viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
         launch {
           viewModel.getCharacters.collectLatest {
-            Toast.makeText(requireContext(),it.toString(),Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
           }
         }
       }
@@ -74,9 +74,8 @@ class CharactersFragment : Fragment() {
 
   private fun observers() {
 
-
     viewModel.characteresMarvel.observe(viewLifecycleOwner, {
-      if(adapter.currentList.isEmpty()){
+      if (adapter.currentList.isEmpty()) {
         adapter.submitList(it)
       } else {
         val list = adapter.currentList.toMutableList()

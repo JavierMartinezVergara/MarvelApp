@@ -16,7 +16,7 @@
       >
 
     <ImageView
-        android:id="@+id/imageComic"
+        android:id="@+id/image_character"
         android:layout_width="140dp"
         android:layout_height="160dp"
         android:scaleType="centerCrop"
@@ -29,16 +29,16 @@
         />
 
     <TextView
-        android:id="@+id/titleComic"
+        android:id="@+id/name_text"
         style="@style/TextHome"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:maxLines="2"
         android:textAlignment="center"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@id/imageComic"
-        app:layout_constraintStart_toStartOf="@+id/imageComic"
-        app:layout_constraintTop_toBottomOf="@id/imageComic"
+        app:layout_constraintEnd_toEndOf="@id/image_character"
+        app:layout_constraintStart_toStartOf="@+id/image_character"
+        app:layout_constraintTop_toBottomOf="@id/image_character"
         tools:text="Wolverine es un superheroes de de los mejores"
         />
 

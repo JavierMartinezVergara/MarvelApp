@@ -8,4 +8,9 @@
   <string name="error_characters">Error al obtener personajes (Detail : %1$s)</string>
   <string name="nav_header_description">Image Nav Header</string>
   <string name="menu_character">Characters</string>
+  <string name="caracteres">Characters</string>
+  <string name="imageHeader">Image header</string>
+  <string name="comics">Comics</string>
+  <string name="series">Series</string>
+  <string name="image_item">Image item</string>
 </resources>

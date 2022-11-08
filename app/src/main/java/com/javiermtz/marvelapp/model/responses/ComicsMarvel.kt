@@ -2,7 +2,7 @@ package com.javiermtz.marvelapp.model.responses
 
 import com.google.gson.annotations.SerializedName
 
-data class ResultsComics(
+data class ComicsMarvel(
 
   @SerializedName("id") val id: Int,
   @SerializedName("digitalId") val digitalId: Int,
