@@ -1,7 +1,7 @@
 package com.javiermtz.marvelapp.domain.models
 
-data class CharactersMarvel(
+data class ComicDTO(
   val id: Int,
-  val name : String,
+  val title : String,
   val image : String,
 )

@@ -3,10 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/charactersFragment">
+    app:startDestination="@id/homeFragment">
 
   <fragment
-      android:id="@+id/charactersFragment"
+      android:id="@+id/homeFragment"
+      android:name="com.javiermtz.marvelapp.presentation.home.HomeFragment"
+      android:label="@string/caracteres"
+      tools:layout="@layout/fragment_home"
+      >
+
+  </fragment>
+
+  <fragment
+      android:id="@+id/characters"
       android:name="com.javiermtz.marvelapp.presentation.characters.CharactersFragment"
       android:label="fragment_characters"
       tools:layout="@layout/fragment_characters" >

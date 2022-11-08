@@ -1,11 +1,10 @@
 package com.javiermtz.marvelapp.data.repository
 
-import com.javiermtz.api.*
 import com.javiermtz.api.remote.MarvelApi
 import com.javiermtz.marvelapp.domain.models.CharactersMarvel
+import com.javiermtz.marvelapp.domain.models.ComicDTO
 import com.javiermtz.marvelapp.domain.models.mappers.toListCharacters
-import com.javiermtz.marvelapp.model.responses.ResponseMarvel
-import com.javiermtz.marvelapp.model.responses.ResponseMarvelComics
+import com.javiermtz.marvelapp.domain.models.mappers.toListComics
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -35,7 +34,20 @@ class RemoteDataSourceImpl @Inject constructor(
 
   }
 
-  override fun getComics(): Flow<ResponseMarvelComics> {
-    TODO("Not yet implemented")
+  override fun getComics(): Flow<List<ComicDTO>> {
+    var list: List<ComicDTO>
+    return flow {
+      val response = api.getComics()
+      list = if (response.data.results.isNotEmpty()) {
+        response.data.results.toListComics().toList()
+      } else {
+        emptyList()
+      }
+      emit(list)
+    }.catch { e ->
+        print(e.message)
+        emit(emptyList())
+      }
+      .flowOn(Dispatchers.IO)
   }
 }

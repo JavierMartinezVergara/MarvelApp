@@ -10,10 +10,10 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.javiermtz.marvelapp.R
 import com.javiermtz.marvelapp.databinding.FragmentCharacterDetailBinding
-import com.javiermtz.marvelapp.model.responses.ResultsComics
+import com.javiermtz.marvelapp.model.responses.ComicsMarvel
 import com.javiermtz.marvelapp.presentation.comics.ComicsViewModel
-import com.javiermtz.marvelapp.presentation.detailcharacter.ComicsAdapter.OnClickListener
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class CharacterDetailFragment : Fragment() {
@@ -22,7 +22,7 @@ class CharacterDetailFragment : Fragment() {
   private val viewModel: ComicsViewModel by viewModels()
   private lateinit var adapter: ComicsAdapter
 
-  private val datos = mutableListOf<ResultsComics>()
+  private val datos = mutableListOf<ComicsMarvel>()
 
   val args: CharacterDetailFragmentArgs by navArgs()
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,7 +54,7 @@ class CharacterDetailFragment : Fragment() {
     binding.numSeriesCharacter.text =
       requireContext().getString(R.string.num_series, args.characterData.numSeries.toString())
 
-    adapter = ComicsAdapter(OnClickListener { comic ->
+    adapter = ComicsAdapter( { comic ->
     })
 
   }
