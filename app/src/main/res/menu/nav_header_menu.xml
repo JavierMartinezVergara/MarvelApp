@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <group android:checkableBehavior="single">
+  <item
+      android:id="@+id/characters"
+      android:icon="@drawable/ic_character"
+      android:title="@string/menu_character" />
+  <item
+      android:id="@+id/comics"
+      android:icon="@drawable/ic_comic"
+      android:title="@string/menu_character" />
+  <item
+      android:id="@+id/series"
+      android:icon="@drawable/ic_serie"
+      android:title="@string/menu_character" />
+  <item
+      android:id="@+id/nav_favorites"
+      android:icon="@drawable/ic_favorite"
+      android:title="@string/menu_character" />
+  </group>
+
+</menu>

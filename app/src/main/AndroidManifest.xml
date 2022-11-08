@@ -14,7 +14,8 @@
       android:supportsRtl="true"
       android:theme="@style/Theme.CustomSplashScreenTheme">
     <activity
-        android:name=".ui.MainActivity"
+        android:theme="@style/Theme.MarvelApp.NoActionBar"
+        android:name="com.javiermtz.marvelapp.presentation.MainActivity"
         android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
