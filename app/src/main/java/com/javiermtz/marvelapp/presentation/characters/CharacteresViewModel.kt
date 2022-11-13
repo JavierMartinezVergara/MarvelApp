@@ -8,71 +8,45 @@ import com.javiermtz.marvelapp.data.repository.RepositoryMarvel
 import com.javiermtz.marvelapp.data.repository.ResultWrapper.GenericError
 import com.javiermtz.marvelapp.data.repository.ResultWrapper.Loading
 import com.javiermtz.marvelapp.data.repository.ResultWrapper.Success
+import com.javiermtz.marvelapp.domain.models.CharactersMarvel
 import com.javiermtz.marvelapp.domain.usecase.UseCases
 import com.javiermtz.marvelapp.model.responses.Results
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import okhttp3.internal.userAgent
 import javax.inject.Inject
 
 @HiltViewModel
 class CharacteresViewModel @Inject constructor(
   private val repositoryMarvel: RepositoryMarvel,
   private val useCases: UseCases
-) : ViewModel(){
+) : ViewModel() {
 
-  val getCharacters = useCases.getMarvelCharactersUseCase()
+  private val _characters = MutableSharedFlow<List<CharactersMarvel>>()
+  val characters = _characters.asSharedFlow()
 
   init {
-    getCharacters()
-  }
-
-
-
-  private val _characteresMarvel = MutableLiveData<MutableList<Results>>()
-  val characteresMarvel : LiveData<MutableList<Results>> = _characteresMarvel
-
-  private val _loading = MutableLiveData(true)
-  val loading : LiveData<Boolean> = _loading
-
-  private val _error = MutableLiveData("")
-  val error : LiveData<String> = _error
-
-  var limite : Int = 0
-
-
-  fun getCharacters(limit: Int = 0){
     viewModelScope.launch {
-      withContext(Dispatchers.IO){
-        when(val response = repositoryMarvel.getMarvelCharacters(limit)){
-          is GenericError -> {
-            _loading.postValue(false)
-            _error.postValue(response.error)
-          }
-          is Success -> {
-            _error.postValue(null)
-            _loading.postValue(false)
-            val data = response.dataResponse.data.results.toMutableList()
-            _characteresMarvel.postValue(data)
-            limite = response.dataResponse.data.offset+100
-          }
-          Loading -> _loading.postValue(true)
-        }
+      useCases.getMarvelCharactersUseCase().collectLatest {
+        _characters.emit(it)
       }
     }
+
   }
 
-  fun loading(){
-    _loading.value = true
-  }
+  private val _characteresMarvel = MutableLiveData<MutableList<Results>>()
+  val characteresMarvel: LiveData<MutableList<Results>> = _characteresMarvel
 
+  private val _loading = MutableLiveData(true)
+  val loading: LiveData<Boolean> = _loading
 
+  private val _error = MutableLiveData("")
+  val error: LiveData<String> = _error
 
 }
 
-operator fun <T> MutableLiveData<ArrayList<T>>.plusAssign(values: List<T>) {
-  val value = this.value ?: arrayListOf()
-  value.addAll(values)
-  this.value = value
-}

@@ -9,9 +9,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.javiermtz.marvelapp.databinding.FragmentHomeBinding
-import com.javiermtz.marvelapp.presentation.detailcharacter.ComicsAdapter
+import com.javiermtz.marvelapp.presentation.characters.CharactersFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -23,6 +24,7 @@ class HomeFragment : Fragment() {
   private lateinit var adapterCharacters: CharactersHomeAdapter
 
   private lateinit var adapterComics: ComicsAdapter
+  private lateinit var adapterSeries: SeriesHomeAdapter
   private val viewModel: HomeViewModel by viewModels()
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,16 +36,17 @@ class HomeFragment : Fragment() {
     savedInstanceState: Bundle?
   ): View {
     binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+    viewModel.getComics()
     return binding.root
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    viewModel.getComics()
     setAdapter()
     viewLifecycleOwner.lifecycleScope.launch {
       viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
         launch {
-          viewModel.getCharacters.collectLatest {
+          viewModel.characters.collectLatest {
             adapterCharacters.submitList(it)
           }
         }
@@ -53,23 +56,42 @@ class HomeFragment : Fragment() {
             adapterComics.submitList(it)
           }
         }
+        launch {
+          viewModel.series.collectLatest {
+            adapterSeries.submitList(it)
+          }
+        }
       }
     }
 
   }
 
   private fun setAdapter() {
-    adapterCharacters = CharactersHomeAdapter()
-    adapterComics = ComicsAdapter{
+    adapterCharacters = CharactersHomeAdapter{
+      val directions = HomeFragmentDirections.actionHomeFragmentToCharacterDetail(it)
+      findNavController().navigate(directions)
+    }
+    adapterComics = ComicsAdapter {
+
+    }
+    adapterSeries = SeriesHomeAdapter {
 
     }
 
-    binding.comicsRecycler.layoutManager =
-      LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+    binding.comicsRecycler.layoutManager = setLayoutManayer()
     binding.comicsRecycler.adapter = adapterComics
-    binding.charatersRecycler.layoutManager =
-      LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
+    binding.charatersRecycler.layoutManager = setLayoutManayer()
     binding.charatersRecycler.adapter = adapterCharacters
+
+    binding.seriesRecycler.layoutManager = setLayoutManayer()
+    binding.seriesRecycler.adapter = adapterSeries
+  }
+
+  private fun setLayoutManayer(): LinearLayoutManager {
+    return LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
   }
 
 }
+
+

@@ -9,15 +9,15 @@
   <item
       android:id="@+id/comics"
       android:icon="@drawable/ic_comic"
-      android:title="@string/menu_character" />
+      android:title="@string/menu_comics" />
   <item
       android:id="@+id/series"
       android:icon="@drawable/ic_serie"
-      android:title="@string/menu_character" />
+      android:title="@string/menu_series" />
   <item
       android:id="@+id/nav_favorites"
       android:icon="@drawable/ic_favorite"
-      android:title="@string/menu_character" />
+      android:title="@string/menu_favs" />
   </group>
 
 </menu>

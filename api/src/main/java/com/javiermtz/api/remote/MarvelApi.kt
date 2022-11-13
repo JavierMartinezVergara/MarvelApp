@@ -2,6 +2,7 @@ package com.javiermtz.api.remote
 
 import com.javiermtz.api.models.response.ResponseMarvel
 import com.javiermtz.api.models.response.ResponseMarvelComics
+import com.javiermtz.api.models.response.ResponseMarvelSerie
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -26,4 +27,12 @@ interface MarvelApi {
     @Query("ts") ts: Int = 1643528450,
     @Query("hash") hash: String = "f791190f97797b142ceccb5b02e6c561",
   ): ResponseMarvelComics
+
+  @GET("/v1/public/series")
+  suspend fun getSeries(
+
+    @Query("apikey") apiKey: String = "cadf4a57a4c3262a0709cd0207f86d8f",
+    @Query("ts") ts: Int = 1643528450,
+    @Query("hash") hash: String = "f791190f97797b142ceccb5b02e6c561",
+  ): ResponseMarvelSerie
 }

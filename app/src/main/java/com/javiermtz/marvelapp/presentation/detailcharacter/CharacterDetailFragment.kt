@@ -12,8 +12,8 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.javiermtz.marvelapp.R
 import com.javiermtz.marvelapp.databinding.FragmentCharacterDetailBinding
-import com.javiermtz.marvelapp.model.responses.ComicsMarvel
 import com.javiermtz.marvelapp.presentation.comics.ComicsViewModel
+import com.javiermtz.marvelapp.presentation.home.ComicsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -50,19 +50,18 @@ class CharacterDetailFragment : Fragment() {
       .error(R.drawable.splash_image)
       .into(binding.imageCharacter)
     binding.imageCharacter.setOnClickListener {
-      val intent : Intent = Intent(Intent.ACTION_VIEW, Uri.parse(args.characterData.url))
-      startActivity(intent)
+      //val intent : Intent = Intent(Intent.ACTION_VIEW, Uri.parse(args.characterData.url))
+      //startActivity(intent)
     }
-    binding.nameCharacter.text = args.characterData.name
+    //binding.nameCharacter.text = args.characterData.name
     binding.descriptionCharacter.text = args.characterData.description
-    binding.numComicsCharacter.text =
-      requireContext().getString(R.string.num_comics, args.characterData.numComics.toString())
-    binding.numSeriesCharacter.text =
-      requireContext().getString(R.string.num_series, args.characterData.numSeries.toString())
+    binding.tvComicsAppearance.text =
+      requireContext().getString(R.string.num_comics, )
+
 
     adapter = ComicsAdapter({ comic ->
-      //val intent : Intent = Uri.parse(comic.urls.first().url).let {
-      // Intent(Intent.ACTION_VIEW, it)
+      //val intent : Intent = Uri.parse(comic.first().url).let {
+      //Intent(Intent.ACTION_VIEW, it)
       //}
       //startActivity(intent)
     })

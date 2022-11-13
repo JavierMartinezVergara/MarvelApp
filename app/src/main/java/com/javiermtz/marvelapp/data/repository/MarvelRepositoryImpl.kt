@@ -2,6 +2,7 @@ package com.javiermtz.marvelapp.data.repository
 
 import com.javiermtz.marvelapp.domain.models.CharactersMarvel
 import com.javiermtz.marvelapp.domain.models.ComicDTO
+import com.javiermtz.marvelapp.domain.models.SerieDTO
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -14,5 +15,9 @@ class MarvelRepositoryImpl @Inject constructor(
 
   override fun getComics(): Flow<List<ComicDTO>> {
     return remoteDataSource.getComics()
+  }
+
+  override fun getSeries(): Flow<List<SerieDTO>> {
+    return remoteDataSource.getSeries()
   }
 }

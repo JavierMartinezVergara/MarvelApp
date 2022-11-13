@@ -11,12 +11,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import com.javiermtz.marvelapp.R
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.javiermtz.marvelapp.databinding.FragmentCharactersBinding
-import com.javiermtz.marvelapp.model.local.Character
-import com.javiermtz.marvelapp.presentation.characters.CharacterAdapter.OnClickListener
-import com.javiermtz.marvelapp.presentation.characters.CharacterAdapter.OnClickListener2
-import com.javiermtz.marvelapp.util.Constans
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -41,40 +37,24 @@ class CharactersFragment : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    viewLifecycleOwner.lifecycleScope.launch {
-      viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-        launch {
-          viewModel.getCharacters.collectLatest {
-            Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
-          }
-        }
-      }
-    }
+    setAdapter()
     observers()
-    adapter = CharacterAdapter(OnClickListener { dataCharacter ->
-      val characterData = Character(
-        id = dataCharacter.id,
-        name = dataCharacter.name,
-        image = dataCharacter.thumbnail.path + Constans.MARVELDIMENSIONLARGE + dataCharacter.thumbnail.extension,
-        description = dataCharacter.description,
-        numComics = dataCharacter.comics.available,
-        numSeries = dataCharacter.series.available,
-        url = dataCharacter.urls.firstOrNull()?.url ?: ""
-      )
-      val action =
-        CharactersFragmentDirections.actionCharactersFragmentToCharacterDetailFragment(characterData)
-      findNavController().navigate(action)
-    }, OnClickListener2 {
-      viewModel.getCharacters(viewModel.limite)
-      viewModel.loading()
-    })
-    binding.recyclerViewCharacters.adapter = adapter
 
   }
 
   private fun observers() {
 
-    viewModel.characteresMarvel.observe(viewLifecycleOwner, {
+    viewLifecycleOwner.lifecycleScope.launch {
+      viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+        launch {
+          viewModel.characters.collectLatest {
+            adapter.submitList(it)
+          }
+        }
+      }
+    }
+
+    /*viewModel.characteresMarvel.observe(viewLifecycleOwner, {
       if (adapter.currentList.isEmpty()) {
         adapter.submitList(it)
       } else {
@@ -97,6 +77,21 @@ class CharactersFragment : Fragment() {
         binding.imgError.visibility = View.GONE
         binding.errorText.visibility = View.GONE
       }
-    })
+    }*/
+
+  }
+
+  private fun setAdapter() {
+    adapter = CharacterAdapter { dataCharacter ->
+      val action =
+        CharactersFragmentDirections.actionCharactersFragmentToCharacterDetailFragment(dataCharacter)
+      findNavController().navigate(action)
+    }
+    binding.recyclerViewCharacters.adapter = adapter
+    binding.recyclerViewCharacters.layoutManager = setLayoutManayer()
+  }
+
+  private fun setLayoutManayer(): LinearLayoutManager {
+    return LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
   }
 }
