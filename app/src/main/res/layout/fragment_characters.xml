@@ -34,6 +34,7 @@
       app:lottie_rawRes="@raw/error"
       app:lottie_speed="1"
       tools:ignore="ContentDescription"
+      android:visibility="gone"
       />
 
   <com.airbnb.lottie.LottieAnimationView
@@ -53,6 +54,7 @@
       app:lottie_rawRes="@raw/waiting"
       app:lottie_loop="true"
       app:lottie_speed="1"
+      android:visibility="gone"
       tools:ignore="ContentDescription"/>
 
   <TextView

@@ -7,22 +7,22 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.javiermtz.marvelapp.databinding.CharacterItemBinding
-import com.javiermtz.marvelapp.model.responses.Results
+import com.javiermtz.marvelapp.domain.models.CharactersMarvel
 import com.javiermtz.marvelapp.presentation.characters.CharacterAdapter.ViewHolder
+import com.javiermtz.marvelapp.presentation.toLoad
 import com.javiermtz.marvelapp.util.Constans
 
 class CharacterAdapter(
-  private val onClickListener: OnClickListener,
-  private val onClickListener2: OnClickListener2
+  val onCLickLister: (CharactersMarvel) -> Unit
 ) :
-  ListAdapter<Results, ViewHolder>(MyDiffUtil) {
+  ListAdapter<CharactersMarvel, ViewHolder>(MyDiffUtil) {
 
-  companion object MyDiffUtil : DiffUtil.ItemCallback<Results>() {
-    override fun areItemsTheSame(oldItem: Results, newItem: Results): Boolean {
+  companion object MyDiffUtil : DiffUtil.ItemCallback<CharactersMarvel>() {
+    override fun areItemsTheSame(oldItem: CharactersMarvel, newItem: CharactersMarvel): Boolean {
       return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: Results, newItem: Results): Boolean {
+    override fun areContentsTheSame(oldItem: CharactersMarvel, newItem: CharactersMarvel): Boolean {
       return oldItem.id == newItem.id
     }
   }
@@ -38,32 +38,22 @@ class CharacterAdapter(
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
     val result = getItem(position)
     holder.itemView.setOnClickListener {
-      onClickListener.onClick(result)
     }
-    if (position == currentList.size - 1) {
-      onClickListener2.onClick2()
-    }
-    holder.bind(result)
+    holder.bind(result, onCLickLister)
   }
 
   inner class ViewHolder(private val binding: CharacterItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
-    fun bind(results: Results?) {
-      binding.name.text = results?.name
-      Glide.with(binding.imageCharacter)
-        .load(results?.thumbnail?.path + Constans.MARVELDIMENSIONMEDIUM + results?.thumbnail?.extension)
-        .into(binding.imageCharacter)
+    fun bind(charactersMarvel: CharactersMarvel, onCLickLister: (CharactersMarvel) -> Unit) {
+      binding.tvName.text = charactersMarvel.name
+      binding.imgCharacter.toLoad(charactersMarvel.image)
 
+      binding.root.setOnClickListener {
+        onCLickLister(charactersMarvel)
+      }
     }
   }
 
-  class OnClickListener(val clickListener: (result: Results) -> Unit) {
-    fun onClick(result: Results) = clickListener(result)
-  }
-
-  class OnClickListener2(val clickListener2: () -> Unit) {
-    fun onClick2() = clickListener2()
-  }
 }
 
 

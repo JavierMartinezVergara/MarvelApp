@@ -3,8 +3,10 @@ package com.javiermtz.marvelapp.data.repository
 import com.javiermtz.api.remote.MarvelApi
 import com.javiermtz.marvelapp.domain.models.CharactersMarvel
 import com.javiermtz.marvelapp.domain.models.ComicDTO
+import com.javiermtz.marvelapp.domain.models.SerieDTO
 import com.javiermtz.marvelapp.domain.models.mappers.toListCharacters
 import com.javiermtz.marvelapp.domain.models.mappers.toListComics
+import com.javiermtz.marvelapp.domain.models.mappers.toListSeries
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -48,6 +50,23 @@ class RemoteDataSourceImpl @Inject constructor(
         print(e.message)
         emit(emptyList())
       }
+      .flowOn(Dispatchers.IO)
+  }
+
+  override fun getSeries(): Flow<List<SerieDTO>> {
+    var list: List<SerieDTO>
+    return flow {
+      val response = api.getSeries()
+      list = if (response.data.results.isNotEmpty()) {
+        response.data.results.toListSeries().toList()
+      } else {
+        emptyList()
+      }
+      emit(list)
+    }.catch { e ->
+      print(e.message)
+      emit(emptyList())
+    }
       .flowOn(Dispatchers.IO)
   }
 }

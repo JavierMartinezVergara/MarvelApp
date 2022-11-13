@@ -1,4 +1,4 @@
-package com.javiermtz.marvelapp.presentation.comics
+package com.javiermtz.marvelapp.presentation.series
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.javiermtz.marvelapp.R
 
-class ComicFragment : Fragment() {
+class SeriesFragment : Fragment() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

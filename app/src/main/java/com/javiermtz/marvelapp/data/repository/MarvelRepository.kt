@@ -2,6 +2,7 @@ package com.javiermtz.marvelapp.data.repository
 
 import com.javiermtz.marvelapp.domain.models.CharactersMarvel
 import com.javiermtz.marvelapp.domain.models.ComicDTO
+import com.javiermtz.marvelapp.domain.models.SerieDTO
 import kotlinx.coroutines.flow.Flow
 
 interface MarvelRepository {
@@ -9,4 +10,6 @@ interface MarvelRepository {
   fun getCharacters() : Flow<List<CharactersMarvel>>
 
   fun getComics() : Flow<List<ComicDTO>>
+
+  fun getSeries() : Flow<List<SerieDTO>>
 }

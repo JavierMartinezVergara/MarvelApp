@@ -14,6 +14,7 @@ import com.javiermtz.marvelapp.domain.models.CharactersMarvel
 import com.javiermtz.marvelapp.presentation.characters.CharacterAdapter.ViewHolder
 
 class CharactersHomeAdapter(
+  private val characterListener: (CharactersMarvel) -> Unit
 ) :
   ListAdapter<CharactersMarvel, CharactersViewHolder>(DiffUtilItem) {
 
@@ -38,7 +39,7 @@ class CharactersHomeAdapter(
 
   override fun onBindViewHolder(holder: CharactersViewHolder, position: Int) {
     val item = getItem(position)
-    holder.bind(item)
+    holder.bind(item, characterListener)
   }
 
 }
@@ -46,11 +47,15 @@ class CharactersHomeAdapter(
 class CharactersViewHolder(view: View) : RecyclerView.ViewHolder(view) {
   private val binding = CharacterHomeItemBinding.bind(view)
 
-  fun bind(item: CharactersMarvel) {
+  fun bind(item: CharactersMarvel, characterListener: (CharactersMarvel) -> Unit) {
     binding.apply {
       nameText.text = item.name
       imageCharacter.load(item.image)
 
+    }
+
+    binding.root.setOnClickListener {
+      characterListener(item)
     }
 
   }

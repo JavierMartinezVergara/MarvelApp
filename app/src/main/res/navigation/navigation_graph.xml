@@ -12,25 +12,44 @@
       tools:layout="@layout/fragment_home"
       >
 
+    <action
+        android:id="@+id/action_homeFragment_to_characterDetail"
+        app:destination="@id/characterDetail" />
   </fragment>
 
   <fragment
       android:id="@+id/characters"
       android:name="com.javiermtz.marvelapp.presentation.characters.CharactersFragment"
-      android:label="fragment_characters"
+      android:label="Personajes"
       tools:layout="@layout/fragment_characters" >
     <action
         android:id="@+id/action_charactersFragment_to_characterDetailFragment"
         app:destination="@id/characterDetail">
     </action>
   </fragment>
+
+  <fragment
+      android:id="@+id/series"
+      android:name="com.javiermtz.marvelapp.presentation.series.SeriesFragment"
+      android:label="Series"
+      tools:layout="@layout/fragment_series" >
+
+  </fragment>
+
+  <fragment
+      android:id="@+id/comics"
+      android:name="com.javiermtz.marvelapp.presentation.comics.ComicFragment"
+      android:label="Comics"
+      tools:layout="@layout/fragment_comic" >
+
+  </fragment>
   <fragment
       android:id="@+id/characterDetail"
       android:name="com.javiermtz.marvelapp.presentation.detailcharacter.CharacterDetailFragment"
-      android:label="fragment_character_detail"
+      android:label="Detalle"
       tools:layout="@layout/fragment_character_detail" >
       <argument
         android:name="characterData"
-        app:argType="com.javiermtz.marvelapp.model.local.Character" />
+        app:argType="com.javiermtz.marvelapp.domain.models.CharactersMarvel" />
   </fragment>
 </navigation>

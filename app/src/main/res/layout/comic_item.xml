@@ -19,7 +19,7 @@
         android:id="@+id/imageComic"
         android:layout_width="140dp"
         android:layout_height="160dp"
-        android:scaleType="centerCrop"
+        android:scaleType="fitXY"
         android:src="@drawable/splash_image"
         android:contentDescription="@string/image_item"
         app:layout_constraintEnd_toEndOf="parent"
