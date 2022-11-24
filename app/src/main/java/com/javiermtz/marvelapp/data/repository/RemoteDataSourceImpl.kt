@@ -15,7 +15,8 @@ import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 class RemoteDataSourceImpl @Inject constructor(
-  private val api: MarvelApi
+  private val api: MarvelApi,
+  private val mD5: MD5
 ) : RemoteDatasource {
   override fun getCharacters(): Flow<List<CharactersMarvel>> {
     var list: List<CharactersMarvel>
@@ -41,15 +42,37 @@ class RemoteDataSourceImpl @Inject constructor(
     return flow {
       val response = api.getComics()
       list = if (response.data.results.isNotEmpty()) {
-        response.data.results.toListComics().toList()
+        response.data.results.toListComics()
       } else {
         emptyList()
       }
+      //TODO tienes un error en el mapper
       emit(list)
     }.catch { e ->
-        print(e.message)
-        emit(emptyList())
+      print(e.message)
+      emit(emptyList())
+    }
+      .flowOn(Dispatchers.IO)
+  }
+
+  override fun getComicsByCharacter(characterId: Int): Flow<List<ComicDTO>> {
+    var list: List<ComicDTO>
+    return flow {
+      val response = api.getComicsByCharacter(
+        characterId = characterId, ts = mD5.currentTimestamp,
+        hash = mD5.getMD5()
+      )
+      list = if (response.data.results.isNotEmpty()) {
+        response.data.results.toListComics()
+      } else {
+        emptyList()
       }
+      //TODO tienes un error en el mapper
+      emit(list)
+    }.catch { e ->
+      print(e.message)
+      emit(emptyList())
+    }
       .flowOn(Dispatchers.IO)
   }
 

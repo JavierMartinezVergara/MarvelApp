@@ -30,7 +30,16 @@ fun List<ResultsComics>.toListComics(): List<ComicDTO> {
       ComicDTO(
         id = comic.id,
         title = comic.title,
-        image = "${comic.thumbnail.path}.${comic.thumbnail.extension}"
+        image = "${comic.thumbnail.path}.${comic.thumbnail.extension}",
+        description = comic.description ?: "",
+        urlLink = comic.urls.firstOrNull()?.url ?: "",
+        price = comic.prices.firstOrNull()?.price ?: 0.0,
+        writer = comic.creators.items.firstOrNull()?.name ?: "",
+        datePublisher = comic.dates.firstOrNull {
+          it.type == "onsaleDate"
+        }?.date ?: "",
+        creator = ""
+
       )
     )
   }

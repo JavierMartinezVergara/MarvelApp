@@ -1,7 +1,17 @@
 package com.javiermtz.marvelapp.domain.models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class ComicDTO(
-  val id: Int,
-  val title : String,
-  val image : String,
-)
+  val id: Int = 0,
+  val title : String = "",
+  val description : String = "",
+  val image : String = "",
+  val urlLink: String = "",
+  val price: Double = 0.0,
+  val creator: String = "Desconocido",
+  val datePublisher: String = "",
+  val writer : String = "Desconocido"
+): Parcelable

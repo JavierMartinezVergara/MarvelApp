@@ -20,4 +20,8 @@ class MarvelRepositoryImpl @Inject constructor(
   override fun getSeries(): Flow<List<SerieDTO>> {
     return remoteDataSource.getSeries()
   }
+
+  override fun getComicsByCharacter(characterId: Int): Flow<List<ComicDTO>> {
+    return remoteDataSource.getComicsByCharacter(characterId)
+  }
 }

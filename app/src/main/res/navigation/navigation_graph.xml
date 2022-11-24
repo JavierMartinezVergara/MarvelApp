@@ -15,6 +15,9 @@
     <action
         android:id="@+id/action_homeFragment_to_characterDetail"
         app:destination="@id/characterDetail" />
+    <action
+        android:id="@+id/action_homeFragment_to_comicDetail"
+        app:destination="@id/comicDetail" />
   </fragment>
 
   <fragment
@@ -51,5 +54,15 @@
       <argument
         android:name="characterData"
         app:argType="com.javiermtz.marvelapp.domain.models.CharactersMarvel" />
+  </fragment>
+
+  <fragment
+      android:id="@+id/comicDetail"
+      android:name="com.javiermtz.marvelapp.presentation.comicDetail.ComicDetailFragment"
+      android:label="Comic Detail"
+      tools:layout="@layout/fragment_comic_detail" >
+    <argument
+        android:name="comicData"
+        app:argType="com.javiermtz.marvelapp.domain.models.ComicDTO" />
   </fragment>
 </navigation>

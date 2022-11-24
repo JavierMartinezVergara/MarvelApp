@@ -8,14 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.javiermtz.marvelapp.R
 import com.javiermtz.marvelapp.databinding.FragmentCharacterDetailBinding
 import com.javiermtz.marvelapp.presentation.comics.ComicsViewModel
 import com.javiermtz.marvelapp.presentation.home.ComicsAdapter
 import dagger.hilt.android.AndroidEntryPoint
-
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CharacterDetailFragment : Fragment() {
@@ -29,7 +34,7 @@ class CharacterDetailFragment : Fragment() {
   val args: CharacterDetailFragmentArgs by navArgs()
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-
+    viewModel.getComics(args.characterData.id)
   }
 
   override fun onCreateView(
@@ -37,13 +42,12 @@ class CharacterDetailFragment : Fragment() {
     savedInstanceState: Bundle?
   ): View {
     binding = FragmentCharacterDetailBinding.inflate(layoutInflater, container, false)
-    observers()
     return binding.root
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    viewModel.getComics(args.characterData.id)
+    observers()
     Glide.with(requireContext())
       .load(args.characterData.image)
       .placeholder(R.drawable.splash_image)
@@ -56,38 +60,32 @@ class CharacterDetailFragment : Fragment() {
     //binding.nameCharacter.text = args.characterData.name
     binding.descriptionCharacter.text = args.characterData.description
     binding.tvComicsAppearance.text =
-      requireContext().getString(R.string.num_comics, )
+      requireContext().getString(R.string.num_comics)
 
 
-    adapter = ComicsAdapter({ comic ->
+    adapter = ComicsAdapter { comic ->
       //val intent : Intent = Uri.parse(comic.first().url).let {
       //Intent(Intent.ACTION_VIEW, it)
       //}
       //startActivity(intent)
-    })
+    }
+    binding.recyclerViewComics.layoutManager =
+      LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+    binding.recyclerViewComics.adapter = adapter
 
   }
 
   private fun observers() {
-    viewModel.comics.observe(viewLifecycleOwner, {
-      val data = it
-      adapter.submitList(data)
-      binding.recyclerViewComics.adapter = adapter
-
-    })
-    viewModel.loading.observe(viewLifecycleOwner, {
-      if (it) {
-        binding.imgLoading.visibility = View.VISIBLE
-        binding.imgError.visibility = View.GONE
-      } else binding.imgLoading.visibility = View.GONE
-    })
-    viewModel.error.observe(viewLifecycleOwner, {
-      if (!it.isNullOrEmpty()) {
-        binding.imgError.visibility = View.VISIBLE
-      } else {
-        binding.imgError.visibility = View.GONE
+    viewLifecycleOwner.lifecycleScope.launch {
+      viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+        launch {
+          viewModel.comics.collectLatest {
+            adapter.submitList(it)
+          }
+        }
       }
-    })
+    }
+
   }
 
 }

@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/purple_200"
+    android:padding="8dp"
+    >
+
+  <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/guideline"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      app:layout_constraintGuide_percent=".5"
+      />
+
+  <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/guideline5"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      app:layout_constraintGuide_percent=".5"
+      />
+
+
+  <androidx.cardview.widget.CardView
+      android:id="@+id/cardViewHeader"
+      android:layout_width="match_parent"
+      android:layout_height="160dp"
+      app:cardCornerRadius="12dp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      >
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="12dp"
+        >
+
+      <TextView
+          android:id="@+id/titleComic"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          app:layout_constraintEnd_toStartOf="@+id/guideline2"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          tools:text="Test"
+          style="@style/TextHeader"
+          />
+
+      <androidx.constraintlayout.widget.Guideline
+          android:id="@+id/guideline2"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical"
+          app:layout_constraintGuide_percent=".60"
+          />
+
+      <View
+          android:background="@drawable/stroke2"
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="@+id/imageCharacter"
+          app:layout_constraintStart_toStartOf="@+id/guideline2"
+          app:layout_constraintTop_toTopOf="parent"
+          />
+
+      <ImageView
+          android:id="@+id/imageCharacter"
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          android:layout_marginStart="30dp"
+          android:contentDescription="@string/imageDescription"
+          android:scaleType="centerInside"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="@+id/guideline2"
+          app:layout_constraintTop_toTopOf="parent"
+          />
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+  </androidx.cardview.widget.CardView>
+
+  <androidx.core.widget.NestedScrollView
+      android:id="@+id/scroll"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_marginTop="8dp"
+      android:contentDescription=""
+      android:fillViewport="true"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/cardViewHeader"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+      <TextView
+          android:id="@+id/titleDetails"
+          style="@style/TextHeader"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/description"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          />
+
+
+      <androidx.cardview.widget.CardView
+          android:id="@+id/cardViewDetail"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:cardCornerRadius="12dp"
+          android:layout_marginTop="12dp"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/titleDetails"
+          >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="12dp"
+            >
+
+          <TextView
+              android:id="@+id/descriptionComic"
+              style="@style/TextComicStyle"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintTop_toTopOf="parent"
+              tools:text="Status de texto"
+              />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+      </androidx.cardview.widget.CardView>
+
+      <TextView
+          android:id="@+id/titleDetails2"
+          style="@style/TextHeader"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/autors"
+          android:layout_margin="16dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/cardViewDetail"
+          />
+
+      <androidx.cardview.widget.CardView
+          android:id="@+id/cardViewDetail2"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:cardCornerRadius="12dp"
+          android:layout_marginTop="16dp"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/titleDetails2"
+          >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="12dp"
+            >
+
+          <androidx.constraintlayout.widget.Guideline
+              android:id="@+id/guideline3"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              app:layout_constraintGuide_percent=".5"
+              />
+
+
+          <TextView
+              android:id="@+id/writerHeader"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginEnd="8dp"
+              android:text="@string/autor"
+              style="@style/TextHeader"
+              android:textSize="18sp"
+              app:layout_constraintEnd_toStartOf="@+id/guideline3"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toTopOf="parent"
+              />
+          <TextView
+              android:id="@+id/writerComic"
+              style="@style/TextComicStyle"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginEnd="8dp"
+              android:padding="6dp"
+              app:layout_constraintEnd_toStartOf="@+id/guideline3"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@+id/writerHeader"
+              tools:text="Status de texto"
+              />
+
+          <TextView
+              android:id="@+id/pencilerHeader"
+              style="@style/TextHeader"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginEnd="8dp"
+              android:text="@string/writer"
+              android:textSize="18sp"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toStartOf="@+id/pencilerComic"
+              app:layout_constraintTop_toTopOf="parent"
+              />
+
+          <TextView
+              android:id="@+id/pencilerComic"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="8dp"
+              android:padding="6dp"
+              style="@style/TextComicStyle"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toStartOf="@+id/guideline3"
+              app:layout_constraintTop_toBottomOf="@id/pencilerHeader"
+              tools:text="Status de texto"
+              />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+      </androidx.cardview.widget.CardView>
+
+      <TextView
+          android:id="@+id/infoHeader"
+          style="@style/TextHeader"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_margin="16dp"
+          android:text="@string/info"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/cardViewDetail2"
+          />
+
+      <androidx.cardview.widget.CardView
+          android:id="@+id/infoCardView"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:cardCornerRadius="12dp"
+          android:layout_marginTop="16dp"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/infoHeader"
+          >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="12dp"
+            >
+
+          <androidx.constraintlayout.widget.Guideline
+              android:id="@+id/guideline4"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              app:layout_constraintGuide_percent=".5"
+              />
+
+
+          <TextView
+              android:id="@+id/dateHeader"
+              style="@style/TextHeader"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginEnd="8dp"
+              android:text="@string/datepublisher"
+              android:textSize="14sp"
+              app:layout_constraintEnd_toStartOf="@+id/guideline4"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toTopOf="parent"
+              />
+          <TextView
+              android:id="@+id/dateComic"
+              style="@style/TextComicStyle"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginEnd="8dp"
+              android:padding="6dp"
+              app:layout_constraintEnd_toStartOf="@+id/guideline4"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@+id/dateHeader"
+              tools:text="Status de texto"
+              />
+
+          <TextView
+              android:id="@+id/priceHeader"
+              style="@style/TextHeader"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginEnd="8dp"
+              android:text="@string/price"
+              android:textSize="14sp"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toStartOf="@+id/priceComic"
+              app:layout_constraintTop_toTopOf="parent"
+              />
+
+          <TextView
+              android:id="@+id/priceComic"
+              style="@style/TextComicStyle"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="8dp"
+              android:padding="6dp"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toStartOf="@+id/guideline4"
+              app:layout_constraintTop_toBottomOf="@id/priceHeader"
+              tools:text="Status de texto"
+              />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+      </androidx.cardview.widget.CardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+  </androidx.core.widget.NestedScrollView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

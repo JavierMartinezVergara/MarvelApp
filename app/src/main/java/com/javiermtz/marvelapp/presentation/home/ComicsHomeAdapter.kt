@@ -12,6 +12,7 @@ import com.javiermtz.marvelapp.databinding.CharacterHomeItemBinding
 import com.javiermtz.marvelapp.domain.models.ComicDTO
 
 class ComicsHomeAdapter(
+  private val onClickListener: (ComicDTO) -> Unit
 ) :
   ListAdapter<ComicDTO, ComicsViewHolder>(DiffUtilItem) {
 
@@ -36,7 +37,7 @@ class ComicsHomeAdapter(
 
   override fun onBindViewHolder(holder: ComicsViewHolder, position: Int) {
     val item = getItem(position)
-    holder.bind(item)
+    holder.bind(item, onClickListener)
   }
 
 }
@@ -44,11 +45,15 @@ class ComicsHomeAdapter(
 class ComicsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
   private val binding = CharacterHomeItemBinding.bind(view)
 
-  fun bind(item: ComicDTO) {
+  fun bind(item: ComicDTO, onClickListener: (ComicDTO) -> Unit) {
     binding.apply {
       nameText.text = item.title
       imageCharacter.load(item.image)
 
+    }
+
+    binding.root.setOnClickListener {
+      onClickListener(item)
     }
 
   }

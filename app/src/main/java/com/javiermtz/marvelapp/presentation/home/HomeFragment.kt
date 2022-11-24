@@ -23,21 +23,15 @@ class HomeFragment : Fragment() {
   private lateinit var binding: FragmentHomeBinding
   private lateinit var adapterCharacters: CharactersHomeAdapter
 
-  private lateinit var adapterComics: ComicsAdapter
+  private lateinit var adapterComics: ComicsHomeAdapter
   private lateinit var adapterSeries: SeriesHomeAdapter
   private val viewModel: HomeViewModel by viewModels()
-
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-  }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View {
     binding = FragmentHomeBinding.inflate(inflater, container, false)
-
-    viewModel.getComics()
     return binding.root
   }
 
@@ -46,18 +40,18 @@ class HomeFragment : Fragment() {
     viewLifecycleOwner.lifecycleScope.launch {
       viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
         launch {
-          viewModel.characters.collectLatest {
+          viewModel.characters.collect {
             adapterCharacters.submitList(it)
           }
         }
 
         launch {
-          viewModel.comics.collectLatest {
+          viewModel.comics.collect {
             adapterComics.submitList(it)
           }
         }
         launch {
-          viewModel.series.collectLatest {
+          viewModel.series.collect {
             adapterSeries.submitList(it)
           }
         }
@@ -67,12 +61,13 @@ class HomeFragment : Fragment() {
   }
 
   private fun setAdapter() {
-    adapterCharacters = CharactersHomeAdapter{
+    adapterCharacters = CharactersHomeAdapter {
       val directions = HomeFragmentDirections.actionHomeFragmentToCharacterDetail(it)
       findNavController().navigate(directions)
     }
-    adapterComics = ComicsAdapter {
-
+    adapterComics = ComicsHomeAdapter {
+      val directions = HomeFragmentDirections.actionHomeFragmentToComicDetail(it)
+      findNavController().navigate(directions)
     }
     adapterSeries = SeriesHomeAdapter {
 
@@ -90,6 +85,10 @@ class HomeFragment : Fragment() {
 
   private fun setLayoutManayer(): LinearLayoutManager {
     return LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+  }
+
+  override fun onDestroy() {
+    super.onDestroy()
   }
 
 }

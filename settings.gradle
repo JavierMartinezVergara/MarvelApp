@@ -9,3 +9,4 @@ dependencyResolutionManagement {
 rootProject.name = "MarvelApp"
 include ':app'
 include ':api'
+include ':composehome'

@@ -7,6 +7,6 @@ data class Series(
 
   @SerializedName("available") val available: Int,
   @SerializedName("collectionURI") val collectionURI: String,
-  @SerializedName("items") val items: List<Items>,
+  @SerializedName("items") val items: List<ItemSummary>,
   @SerializedName("returned") val returned: Int
 )
