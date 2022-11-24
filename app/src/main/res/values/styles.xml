@@ -6,4 +6,23 @@
     <item name="android:textSize">20sp</item>
     <item name="android:textStyle">bold</item>
   </style>
+
+  <style name="TextHeader">
+    <item name="android:textSize">22sp</item>
+    <item name="android:textStyle">bold</item>
+    <item name="fontFamily">@font/ptsans_bold</item>
+  </style>
+
+  <style name="TextComicStyle">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:background">@drawable/stroke</item>
+    <item name="android:textAlignment">center</item>
+    <item name="android:textSize">12sp</item>
+    <item name="android:padding">16dp</item>
+    <item name="fontFamily">@font/ptsans_regular</item>
+    <item name="fontWeight">500</item>
+  </style>
+
+
 </resources>

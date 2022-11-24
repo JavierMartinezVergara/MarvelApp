@@ -17,4 +17,12 @@
   <string name="series">Series</string>
   <string name="image_item">Image item</string>
   <string name="comicsAppearence">Apariciones en Comics</string>
+  <string name="details">Details</string>
+  <string name="description">Descripción</string>
+  <string name="autors">Autores</string>
+  <string name="autor">Autor:</string>
+  <string name="writer">Escritor:</string>
+  <string name="info">Informacion</string>
+  <string name="datepublisher">Fecha de Publicación</string>
+  <string name="price">Precio</string>
 </resources>

@@ -7,8 +7,8 @@ import com.javiermtz.marvelapp.domain.models.ComicDTO
 import com.javiermtz.marvelapp.domain.models.SerieDTO
 import com.javiermtz.marvelapp.domain.usecase.UseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -18,20 +18,20 @@ class HomeViewModel @Inject constructor(
   private val useCases: UseCases
 ) : ViewModel() {
 
-  private val _comics = MutableSharedFlow<List<ComicDTO>>(replay = 2)
-  val comics = _comics.asSharedFlow()
+  private val _comics = MutableStateFlow<List<ComicDTO>>(listOf())
+  val comics = _comics.asStateFlow()
 
-  private val _series = MutableSharedFlow<List<SerieDTO>>(replay = 2)
-  val series = _series.asSharedFlow()
+  private val _series = MutableStateFlow<List<SerieDTO>>(listOf())
+  val series = _series.asStateFlow()
 
-  private val _characters = MutableSharedFlow<List<CharactersMarvel>>(replay = 2)
-  val characters = _characters.asSharedFlow()
+  private val _characters = MutableStateFlow<List<CharactersMarvel>>(listOf())
+  val characters = _characters.asStateFlow()
 
   private val getCharacters = useCases.getMarvelCharactersUseCase()
   private val getComics = useCases.getMarvelComicsUseCase()
   private val getSeries = useCases.getMarvelSeriesUseCase()
 
-  fun getComics() {
+  init {
     viewModelScope.launch {
       getCharacters.collectLatest { characters ->
         _characters.emit(characters)
@@ -42,9 +42,11 @@ class HomeViewModel @Inject constructor(
       getComics.collectLatest { comics ->
         _comics.emit(comics)
       }
-
-
-
     }
   }
+
+  override fun onCleared() {
+    super.onCleared()
+  }
 }
+

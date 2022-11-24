@@ -11,5 +11,7 @@ interface RemoteDatasource {
 
   fun getComics(): Flow<List<ComicDTO>>
 
+  fun getComicsByCharacter(characterId: Int): Flow<List<ComicDTO>>
+
   fun getSeries(): Flow<List<SerieDTO>>
 }

@@ -12,4 +12,6 @@ interface MarvelRepository {
   fun getComics() : Flow<List<ComicDTO>>
 
   fun getSeries() : Flow<List<SerieDTO>>
+
+  fun getComicsByCharacter(characterId: Int): Flow<List<ComicDTO>>
 }
