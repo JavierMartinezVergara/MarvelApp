@@ -2,10 +2,10 @@ package com.javiermtz.marvelapp.presentation.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.javiermtz.marvelapp.domain.models.CharactersMarvel
-import com.javiermtz.marvelapp.domain.models.ComicDTO
-import com.javiermtz.marvelapp.domain.models.SerieDTO
-import com.javiermtz.marvelapp.domain.usecase.UseCases
+import com.example.shared.models.CharactersMarvel
+import com.example.shared.models.SerieDTO
+import com.example.shared.models.ComicDTO
+import com.example.domain.usecase.UseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

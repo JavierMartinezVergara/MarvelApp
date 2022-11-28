@@ -1,9 +1,8 @@
 package com.javiermtz.api.remote
 
-import com.javiermtz.api.models.response.ResponseMarvel
-import com.javiermtz.api.models.response.ResponseMarvelComics
-import com.javiermtz.api.models.response.ResponseMarvelSerie
-import retrofit2.Response
+import com.example.shared.models.response.ResponseMarvel
+import com.example.shared.models.response.ResponseMarvelComics
+import com.example.shared.models.response.ResponseMarvelSerie
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

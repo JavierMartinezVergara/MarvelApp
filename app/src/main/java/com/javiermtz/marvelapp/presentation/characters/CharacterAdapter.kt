@@ -5,12 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import com.example.shared.models.CharactersMarvel
 import com.javiermtz.marvelapp.databinding.CharacterItemBinding
-import com.javiermtz.marvelapp.domain.models.CharactersMarvel
 import com.javiermtz.marvelapp.presentation.characters.CharacterAdapter.ViewHolder
 import com.javiermtz.marvelapp.presentation.toLoad
-import com.javiermtz.marvelapp.util.Constans
 
 class CharacterAdapter(
   val onCLickLister: (CharactersMarvel) -> Unit

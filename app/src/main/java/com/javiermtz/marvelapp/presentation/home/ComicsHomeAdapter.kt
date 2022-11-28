@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.example.shared.models.ComicDTO
 import com.javiermtz.marvelapp.R
 import com.javiermtz.marvelapp.databinding.CharacterHomeItemBinding
-import com.javiermtz.marvelapp.domain.models.ComicDTO
 
 class ComicsHomeAdapter(
   private val onClickListener: (ComicDTO) -> Unit

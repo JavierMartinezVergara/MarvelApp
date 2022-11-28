@@ -15,6 +15,9 @@ android {
     versionName "1.0"
 
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    buildConfigField("String", "PUBLIC_API_KEY_MARVEL", PUBLIC_API_KEY_MARVEL)
+    buildConfigField("String", "PRIVATE_API_KEY_MARVEL", PRIVATE_API_KEY_MARVEL)
   }
   buildTypes {
     release {
@@ -70,4 +73,6 @@ dependencies {
   implementation "com.google.dagger:hilt-android:2.40.2"
   kapt "com.google.dagger:hilt-android-compiler:2.40.2"
   kapt 'androidx.hilt:hilt-compiler:1.0.0'
+
+  api project(':shared')
 }

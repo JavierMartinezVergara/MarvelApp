@@ -7,11 +7,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.example.shared.models.CharactersMarvel
 import com.javiermtz.marvelapp.R
 import com.javiermtz.marvelapp.databinding.CharacterHomeItemBinding
-import com.javiermtz.marvelapp.databinding.CharacterItemBinding
-import com.javiermtz.marvelapp.domain.models.CharactersMarvel
-import com.javiermtz.marvelapp.presentation.characters.CharacterAdapter.ViewHolder
 
 class CharactersHomeAdapter(
   private val characterListener: (CharactersMarvel) -> Unit

@@ -1,3 +1,5 @@
 <resources>
   <string name="app_name">composeHome</string>
+  <string name="characters">Characters</string>
+  <string name="personajes">Personajes</string>
 </resources>

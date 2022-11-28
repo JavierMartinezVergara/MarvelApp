@@ -10,3 +10,6 @@ rootProject.name = "MarvelApp"
 include ':app'
 include ':api'
 include ':composehome'
+include ':domain'
+include ':util'
+include ':shared'
