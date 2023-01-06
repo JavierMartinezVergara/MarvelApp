@@ -5,22 +5,21 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.shared.models.CharactersMarvel
+import com.example.shared.models.SerieDTO
 import com.javiermtz.marvelapp.databinding.CharacterItemBinding
 import com.javiermtz.marvelapp.presentation.characters.CharacterAdapter.ViewHolder
-import com.javiermtz.marvelapp.presentation.toLoad
 
 class CharacterAdapter(
-  val onCLickLister: (CharactersMarvel) -> Unit
+  val onCLickLister: (SerieDTO) -> Unit
 ) :
-  ListAdapter<CharactersMarvel, ViewHolder>(MyDiffUtil) {
+  ListAdapter<SerieDTO, ViewHolder>(MyDiffUtil) {
 
-  companion object MyDiffUtil : DiffUtil.ItemCallback<CharactersMarvel>() {
-    override fun areItemsTheSame(oldItem: CharactersMarvel, newItem: CharactersMarvel): Boolean {
+  companion object MyDiffUtil : DiffUtil.ItemCallback<SerieDTO>() {
+    override fun areItemsTheSame(oldItem: SerieDTO, newItem: SerieDTO): Boolean {
       return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: CharactersMarvel, newItem: CharactersMarvel): Boolean {
+    override fun areContentsTheSame(oldItem: SerieDTO, newItem: SerieDTO): Boolean {
       return oldItem.id == newItem.id
     }
   }
@@ -42,7 +41,7 @@ class CharacterAdapter(
 
   inner class ViewHolder(private val binding: CharacterItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
-    fun bind(charactersMarvel: CharactersMarvel, onCLickLister: (CharactersMarvel) -> Unit) {
+    fun bind(charactersMarvel: SerieDTO, onCLickLister: (SerieDTO) -> Unit) {
       binding.tvName.text = charactersMarvel.name
       binding.imgCharacter.toLoad(charactersMarvel.image)
 

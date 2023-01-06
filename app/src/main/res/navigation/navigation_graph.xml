@@ -53,7 +53,7 @@
       tools:layout="@layout/fragment_character_detail" >
       <argument
         android:name="characterData"
-        app:argType="com.example.shared.models.CharactersMarvel" />
+        app:argType="com.example.shared.models.SerieDTO" />
   </fragment>
 
   <fragment

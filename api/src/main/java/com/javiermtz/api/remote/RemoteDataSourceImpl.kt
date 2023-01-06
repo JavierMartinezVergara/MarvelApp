@@ -1,12 +1,12 @@
 package com.javiermtz.api.remote
 
-
 import com.example.shared.mappers.toListCharacters
 import com.example.shared.mappers.toListComics
 import com.example.shared.mappers.toListSeries
-import com.example.shared.models.CharactersMarvel
-import com.example.shared.models.ComicDTO
+import com.example.shared.models.CharacterDTO
 import com.example.shared.models.SerieDTO
+import com.example.shared.models.ComicDTO
+import com.example.shared.models.State
 import com.javiermtz.api.util.MD5
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -19,77 +19,75 @@ class RemoteDataSourceImpl @Inject constructor(
   private val api: MarvelApi,
   private val mD5: MD5
 ) : RemoteDatasource {
-  override fun getCharacters(): Flow<List<CharactersMarvel>> {
-    var list: List<CharactersMarvel>
+  override fun getCharacters(): Flow<State<List<CharacterDTO>>> {
     return flow {
+      emit(State.loading())
       val response = api.getAllCharacteres()
-      list = if (response.data.results.isNotEmpty()) {
-        response.data.results.toListCharacters().toMutableList()
+      if (response.data.results.isNotEmpty()) {
+        val data = response.data.results.toListCharacters()
+        emit(State.success(data))
       } else {
-        emptyList()
+        emit(State.empty())
       }
-      emit(list)
     }
       .catch { e ->
         print(e.message)
-        emit(emptyList())
+        emit(State.failed(e.message.toString()))
       }
       .flowOn(Dispatchers.IO)
 
   }
 
-  override fun getComics(): Flow<List<ComicDTO>> {
-    var list: List<ComicDTO>
+  override fun getComics(): Flow<State<List<ComicDTO>>> {
     return flow {
+      emit(State.loading())
       val response = api.getComics()
-      list = if (response.data.results.isNotEmpty()) {
-        response.data.results.toListComics()
+      if (response.data.results.isNotEmpty()) {
+        val data = response.data.results.toListComics()
+        emit(State.success(data))
       } else {
-        emptyList()
+        emit(State.empty())
       }
-      //TODO tienes un error en el mapper
-      emit(list)
     }.catch { e ->
       print(e.message)
-      emit(emptyList())
+      emit(State.failed(e.message.toString()))
     }
       .flowOn(Dispatchers.IO)
   }
 
-  override fun getComicsByCharacter(characterId: Int): Flow<List<ComicDTO>> {
-    var list: List<ComicDTO>
+  override fun getComicsByCharacter(characterId: Int): Flow<State<List<ComicDTO>>> {
     return flow {
+      emit(State.loading())
       val response = api.getComicsByCharacter(
         characterId = characterId, ts = mD5.currentTimestamp,
         hash = mD5.getMD5()
       )
-      list = if (response.data.results.isNotEmpty()) {
-        response.data.results.toListComics()
+      if (response.data.results.isNotEmpty()) {
+        val data = response.data.results.toListComics()
+        emit(State.success(data))
       } else {
-        emptyList()
+        emit(State.empty())
       }
-      //TODO tienes un error en el mapper
-      emit(list)
     }.catch { e ->
       print(e.message)
-      emit(emptyList())
+      emit(State.failed(e.message.toString()))
     }
       .flowOn(Dispatchers.IO)
   }
 
-  override fun getSeries(): Flow<List<SerieDTO>> {
-    var list: List<SerieDTO>
+  override fun getSeries(): Flow<State<List<SerieDTO>>> {
     return flow {
+      emit(State.loading())
       val response = api.getSeries()
-      list = if (response.data.results.isNotEmpty()) {
-        response.data.results.toListSeries().toList()
+      if (response.data.results.isNotEmpty()) {
+        val data = response.data.results.toListSeries().toList()
+        emit(State.success(data))
       } else {
-        emptyList()
+        emit(State.empty())
       }
-      emit(list)
     }.catch { e ->
       print(e.message)
-      emit(emptyList())
+      emit(State.failed(e.message.toString()))
     }
       .flowOn(Dispatchers.IO)
   }

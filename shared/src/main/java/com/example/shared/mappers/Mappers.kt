@@ -1,17 +1,17 @@
 package com.example.shared.mappers
 
-import com.example.shared.models.CharactersMarvel
-import com.example.shared.models.ComicDTO
+import com.example.shared.models.CharacterDTO
 import com.example.shared.models.SerieDTO
+import com.example.shared.models.ComicDTO
 import com.example.shared.models.response.Results
 import com.example.shared.models.response.ResultsComics
 import com.example.shared.models.response.ResultsSeries
 
-fun List<Results>.toListCharacters(): List<CharactersMarvel> {
-  val listCharacters: MutableList<CharactersMarvel> = mutableListOf()
+fun List<Results>.toListCharacters(): List<CharacterDTO> {
+  val listCharacters: MutableList<CharacterDTO> = mutableListOf()
   for (heroes in this) {
     listCharacters.add(
-      CharactersMarvel(
+      CharacterDTO(
         id = heroes.id,
         name = heroes.name,
         image = "${heroes.thumbnail.path}.${heroes.thumbnail.extension}",

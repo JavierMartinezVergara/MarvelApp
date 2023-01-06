@@ -1,17 +1,18 @@
 package com.example.shared
 
-import com.example.shared.models.CharactersMarvel
-import com.example.shared.models.ComicDTO
+import com.example.shared.models.CharacterDTO
 import com.example.shared.models.SerieDTO
+import com.example.shared.models.ComicDTO
+import com.example.shared.models.State
 import kotlinx.coroutines.flow.Flow
 
 interface MarvelRepository {
 
-  fun getCharacters() : Flow<List<CharactersMarvel>>
+  fun getCharacters() : Flow<State<List<CharacterDTO>>>
 
-  fun getComics() : Flow<List<ComicDTO>>
+  fun getComics() : Flow<State<List<ComicDTO>>>
 
-  fun getSeries() : Flow<List<SerieDTO>>
+  fun getSeries() : Flow<State<List<SerieDTO>>>
 
-  fun getComicsByCharacter(characterId: Int): Flow<List<ComicDTO>>
+  fun getComicsByCharacter(characterId: Int): Flow<State<List<ComicDTO>>>
 }

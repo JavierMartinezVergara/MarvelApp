@@ -3,15 +3,13 @@ package com.javiermtz.marvelapp.presentation.characters
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.shared.models.CharactersMarvel
+import com.example.shared.models.SerieDTO
 import com.example.domain.usecase.UseCases
 import com.example.shared.models.response.Results
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -19,7 +17,7 @@ class CharacteresViewModel @Inject constructor(
   private val useCases: UseCases
 ) : ViewModel() {
 
-  private val _characters = MutableSharedFlow<List<CharactersMarvel>>()
+  private val _characters = MutableSharedFlow<List<SerieDTO>>()
   val characters = _characters.asSharedFlow()
 
   init {

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.javiermtz.composehome">
 
+  <uses-permission android:name="android.permission.INTERNET" />
+
   <application
       android:allowBackup="true"
       android:icon="@mipmap/ic_launcher"
@@ -9,6 +11,7 @@
       android:roundIcon="@mipmap/ic_launcher_round"
       android:supportsRtl="true"
       android:name=".ComposeApp"
+      android:usesCleartextTraffic="true"
       android:theme="@style/Theme.MarvelApp">
     <activity
         android:name=".presentation.ComposeHome"

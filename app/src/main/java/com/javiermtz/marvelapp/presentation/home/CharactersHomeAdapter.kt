@@ -6,22 +6,21 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
-import com.example.shared.models.CharactersMarvel
+import com.example.shared.models.SerieDTO
 import com.javiermtz.marvelapp.R
 import com.javiermtz.marvelapp.databinding.CharacterHomeItemBinding
 
 class CharactersHomeAdapter(
-  private val characterListener: (CharactersMarvel) -> Unit
+  private val characterListener: (SerieDTO) -> Unit
 ) :
-  ListAdapter<CharactersMarvel, CharactersViewHolder>(DiffUtilItem) {
+  ListAdapter<SerieDTO, CharactersViewHolder>(DiffUtilItem) {
 
-  companion object DiffUtilItem : DiffUtil.ItemCallback<CharactersMarvel>() {
-    override fun areItemsTheSame(oldItem: CharactersMarvel, newItem: CharactersMarvel): Boolean {
+  companion object DiffUtilItem : DiffUtil.ItemCallback<SerieDTO>() {
+    override fun areItemsTheSame(oldItem: SerieDTO, newItem: SerieDTO): Boolean {
       return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: CharactersMarvel, newItem: CharactersMarvel): Boolean {
+    override fun areContentsTheSame(oldItem: SerieDTO, newItem: SerieDTO): Boolean {
       return oldItem.id == newItem.id
     }
   }
@@ -45,7 +44,7 @@ class CharactersHomeAdapter(
 class CharactersViewHolder(view: View) : RecyclerView.ViewHolder(view) {
   private val binding = CharacterHomeItemBinding.bind(view)
 
-  fun bind(item: CharactersMarvel, characterListener: (CharactersMarvel) -> Unit) {
+  fun bind(item: SerieDTO, characterListener: (SerieDTO) -> Unit) {
     binding.apply {
       nameText.text = item.name
       imageCharacter.load(item.image)

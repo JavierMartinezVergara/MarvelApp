@@ -34,6 +34,11 @@ class ComicDetailFragment : Fragment() {
 
   private fun setLayout() {
 
+    with(binding){
+      titleComic.text = args.comicData.title
+      binding.imageCharacter.toLoad(args.comicData.image)
+    }
+
     args.comicData.apply {
       binding.titleComic.text = title
       binding.imageCharacter.toLoad(image)

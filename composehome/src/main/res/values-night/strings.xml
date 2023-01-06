@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="characters">Characters</string>
-    <string name="personajes">Personajes</string>
+    <string name="characters">Personajes</string>
+    <string name="comics">Comics</string>
+    <string name="series">Series</string>
 </resources>
